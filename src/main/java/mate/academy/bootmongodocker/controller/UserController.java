@@ -32,12 +32,19 @@ public class UserController {
         return userRepository.findById(id);
     }
 
+    @GetMapping("/projection-example")
+    public Iterable<User> getNamesOnly() {
+        return userRepository.findNameAndExcludeId();
+    }
+
     @GetMapping("/inject")
     public void inject() {
         User bob = new User();
         bob.setName("Bob");
+        bob.setEmail("bob@i.ua");
         User alice = new User();
         alice.setName("Alice");
+        alice.setEmail("alice@i.ua");
         userRepository.save(bob);
         userRepository.save(alice);
     }
